@@ -1,47 +1,523 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>charity: water — Become a Global Leader of Social Impact</title>
+
+  <!-- Google Font: Nunito -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- GLOBAL RESET & BASE ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', 'Avenir', sans-serif;
+      color: #1A1A1A;
+      line-height: 1.7;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; }
+
+    /* Reusable eyebrow label style */
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ---------- SECTION 1: STICKY NAV ---------- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #003366;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 60px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    nav .logo img {
+      height: 30px;
+      width: auto;
+      border-radius: 4px; /* softens the white logo box on the navy bar */
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav-links a {
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover { color: #FFC700; }
+
+    .nav-cta {
+      background: #FFC700;
+      color: #003366;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 10px 24px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-cta:hover { background: #FFB300; transform: translateY(-1px); }
+
+    /* ---------- SECTION 2: HERO ---------- */
+    .hero {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      min-height: 560px;
+    }
+
+    .hero-text {
+      background: #003366;
+      padding: 90px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-text .eyebrow { color: #FFC700; letter-spacing: 0.14em; }
+
+    .hero-text h1 {
+      color: #FFFFFF;
+      font-size: clamp(26px, 3.5vw, 46px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-top: 12px;
+    }
+
+    .hero-text p.lead {
+      color: #FFFFFF;
+      opacity: 0.88;
+      font-size: 16px;
+      font-weight: 400;
+      max-width: 460px;
+      margin-top: 20px;
+    }
+
+    .btn-cta {
+      background: #FFC700;
+      color: #003366;
+      font-weight: 800;
+      font-size: 16px;
+      padding: 16px 36px;
+      border-radius: 8px;
+      margin-top: 36px;
+      display: inline-block;
+      align-self: flex-start;
+      transition: all 0.2s ease;
+    }
+
+    .btn-cta:hover { background: #FFB300; transform: translateY(-2px); }
+
+    .hero-text .fineprint {
+      color: #FFFFFF;
+      opacity: 0.55;
+      font-size: 12px;
+      margin-top: 12px;
+    }
+
+    .hero-image { overflow: hidden; }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top; /* keep faces visible */
+      display: block;
+    }
+
+    /* ---------- SECTION 3: IMPACT STATS BAR ---------- */
+    .stats-bar {
+      background: #FFC700;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 48px 60px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 42px;
+      font-weight: 800;
+      color: #003366;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #003366;
+      margin-top: 8px;
+      max-width: 140px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ---------- SECTION 4: STORY ---------- */
+    .story-grid {
+      background: #FFFFFF;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      padding: 96px 60px;
+    }
+
+    .story-text .eyebrow { color: #00A19D; }
+
+    .story-text h2 {
+      color: #003366;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-top: 12px;
+    }
+
+    .story-text p {
+      color: #333333;
+      font-size: 16px;
+      line-height: 1.8;
+      margin-top: 20px;
+    }
+
+    .story-link {
+      display: inline-block;
+      color: #00A19D;
+      font-weight: 700;
+      text-decoration: underline;
+      margin-top: 20px;
+    }
+
+    .story-card {
+      background: #F9F6EF;
+      border-left: 5px solid #FFC700;
+      border-radius: 8px;
+      padding: 36px;
+    }
+
+    .story-card .big-number {
+      font-size: 72px;
+      font-weight: 800;
+      color: #003366;
+      line-height: 1;
+    }
+
+    .story-card .big-label {
+      color: #555555;
+      font-size: 15px;
+      margin-top: 8px;
+    }
+
+    .story-card .divider {
+      border-top: 1px solid #E0D9CE;
+      margin: 24px 0;
+    }
+
+    /* ---------- SECTION 5: THREE VALUE CARDS ---------- */
+    .values {
+      background: #F9F6EF;
+      padding: 96px 60px;
+      text-align: center;
+    }
+
+    .values .eyebrow { color: #00A19D; }
+
+    .values h2 {
+      color: #003366;
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-top: 12px;
+      margin-bottom: 48px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      text-align: left;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 40px 32px;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-top: 4px solid transparent;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      border-top-color: #FFC700;
+    }
+
+    .card-icon { font-size: 36px; margin-bottom: 20px; display: block; }
+    .card-title { font-size: 19px; font-weight: 800; color: #003366; margin-bottom: 12px; }
+    .card-body { font-size: 15px; color: #555555; line-height: 1.7; }
+
+    /* ---------- SECTION 6: CALL TO ACTION ---------- */
+    .cta {
+      background: #003366;
+      padding: 112px 60px;
+      text-align: center;
+    }
+
+    .cta .eyebrow { color: #FFC700; }
+
+    .cta h2 {
+      color: #FFFFFF;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      line-height: 1.15;
+      max-width: 620px;
+      margin: 12px auto 0;
+    }
+
+    .cta p.sub {
+      color: #FFFFFF;
+      opacity: 0.82;
+      font-size: 18px;
+      max-width: 500px;
+      margin: 20px auto 0;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .btn-primary {
+      background: #FFC700;
+      color: #003366;
+      font-weight: 800;
+      font-size: 17px;
+      padding: 18px 44px;
+      border-radius: 8px;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary:hover { background: #FFB300; transform: translateY(-3px); }
+
+    .btn-secondary {
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 17px;
+      padding: 18px 44px;
+      border-radius: 8px;
+      background: transparent;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #FFFFFF;
+    }
+
+    .cta .fineprint {
+      color: #FFFFFF;
+      opacity: 0.5;
+      font-size: 13px;
+      margin-top: 24px;
+    }
+
+    /* ---------- SECTION 7: FOOTER ---------- */
+    footer {
+      background: #001F40;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 52px 60px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    footer .footer-logo img {
+      height: 26px;
+      border-radius: 4px;
+    }
+
+    footer .footer-copy {
+      color: #FFFFFF;
+      opacity: 0.45;
+      font-size: 13px;
+    }
+
+    footer .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    footer .footer-links a {
+      color: #FFFFFF;
+      opacity: 0.65;
+      font-size: 13px;
+    }
+
+    footer .footer-links a:hover { opacity: 1; }
+
+    /* ---------- RESPONSIVE: MOBILE ---------- */
+    @media (max-width: 768px) {
+      nav { padding: 14px 24px; }
+      nav .logo img { height: 24px; }
+      .nav-links { display: none; }
+
+      .hero { grid-template-columns: 1fr; }
+      .hero-image { height: 280px; order: -1; } /* image above text */
+      .hero-text { padding: 48px 28px; }
+
+      .stats-bar { flex-direction: column; gap: 32px; padding: 44px 28px; }
+
+      .story-grid { grid-template-columns: 1fr; gap: 36px; padding: 64px 24px; }
+
+      .values { padding: 64px 24px; }
+      .cards-grid { grid-template-columns: 1fr; }
+
+      .cta { padding: 64px 24px; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+
+      footer { flex-direction: column; text-align: center; padding: 40px 24px; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
 
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
+  <!-- ============ SECTION 1: STICKY NAV ============ -->
+  <nav>
+    <div class="logo">
+      <img src="img/charitywater_logo_horizontal_AllWhite.png" alt="charity: water">
+    </div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">About Us</a>
+      <a href="#">Why Water?</a>
+      <a href="#">Sign In</a>
+      <a href="https://www.charitywater.org" target="_blank" class="nav-cta">GIVE TODAY</a>
+    </div>
+  </nav>
 
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
-            </p>
-        </div>
-    </section>
+  <!-- ============ SECTION 2: HERO ============ -->
+  <header class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">For the Next Generation</p>
+      <h1>Become a Global Leader of Social Impact with Us</h1>
+      <p class="lead">21.6 million people in 29+ countries now have clean water through transparent, measurable impact. There's a place for you beyond just giving. Lead the movement and give clean and safe water to those in need today.</p>
+      <a href="https://www.charitywater.org" target="_blank" class="btn-cta">GIVE TODAY</a>
+      <p class="fineprint">100% of public donations go directly to water projects.</p>
+    </div>
+    <div class="hero-image">
+      <img src="img/6003_Ethiopia_2019_CG-.jpg" alt="Ethiopian family sharing a joyful moment together">
+    </div>
+  </header>
 
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
-    </section>
+  <!-- ============ SECTION 3: IMPACT STATS BAR ============ -->
+  <section class="stats-bar">
+    <div class="stat">
+      <div class="stat-number">21.6M</div>
+      <div class="stat-label">People served with clean water</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">29+</div>
+      <div class="stat-label">Countries with active projects</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Of donations reach water projects</div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4: STORY ============ -->
+  <section class="story-grid">
+    <div class="story-text">
+      <p class="eyebrow">The Crisis</p>
+      <h2>703 million people still have no clean water.</h2>
+      <p>Women and girls walk an average of 6km every day just to collect water — water that makes their families sick. Children miss school. Mothers miss work. Entire communities are trapped in a cycle that clean water can break.</p>
+      <p>When you support charity: water, you're funding transparent, traceable water projects. You can see on a map exactly where your money went and who it helped.</p>
+      <a href="https://www.charitywater.org" target="_blank" class="story-link">See how we track every dollar →</a>
+    </div>
+    <div class="story-card">
+      <div class="big-number">6km</div>
+      <div class="big-label">The average distance walked daily to collect water</div>
+      <div class="divider"></div>
+      <div class="big-number">20kg</div>
+      <div class="big-label">The weight of a full jerry can — carried by children</div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 5: THREE VALUE CARDS ============ -->
+  <section class="values">
+    <p class="eyebrow">Why charity: water?</p>
+    <h2>Your generation can close this gap.</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">💧</span>
+        <div class="card-title">Radical Transparency</div>
+        <div class="card-body">Every dollar tracked. Every project mapped. You can see exactly where your donation went and who it helped — no guessing.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌍</span>
+        <div class="card-title">Real, Measurable Impact</div>
+        <div class="card-body">21.6 million people across 29 countries now have clean water. We publish our financials, outcomes, and methodology publicly every year.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎓</span>
+        <div class="card-title">Lead, Don't Just Give</div>
+        <div class="card-body">Start a campus fundraiser. Donate your birthday. Mobilize your community. There's a role here for people who want to do more than write a check.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 6: CALL TO ACTION ============ -->
+  <section class="cta">
+    <p class="eyebrow">Join the Movement</p>
+    <h2>Your generation can end the water crisis.</h2>
+    <p class="sub">Clean water changes everything — health, education, opportunity. Be part of the solution.</p>
+    <div class="cta-buttons">
+      <a href="https://www.charitywater.org" target="_blank" class="btn-primary">💧 GIVE TODAY</a>
+      <a href="https://www.charitywater.org" target="_blank" class="btn-secondary">START A CAMPUS FUNDRAISER</a>
+    </div>
+    <p class="fineprint">100% of public donations go directly to water projects.</p>
+  </section>
+
+  <!-- ============ SECTION 7: FOOTER ============ -->
+  <footer>
+    <div class="footer-logo">
+      <img src="img/charitywater_logo_horizontal_AllWhite.png" alt="charity: water">
+    </div>
+    <div class="footer-copy">© 2026 charity: water. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="https://www.charitywater.org" target="_blank">charitywater.org</a>
+      <a href="https://www.charitywater.org" target="_blank">Privacy</a>
+      <a href="https://www.charitywater.org" target="_blank">Contact</a>
+    </div>
+  </footer>
+
 </body>
 </html>
